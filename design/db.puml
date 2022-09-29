@@ -1,0 +1,64 @@
+@startuml Database Design
+entity User #b3cde0 {
+    *id: number 
+    ..
+    *firstName: string 
+    *lastName: string
+    *email: string
+    +shortIntro: string
+    +avatar: string 
+    *createdAt: Date
+    *updatedAt: Date
+}
+
+entity Post #b3cde0 {
+    *id: number
+    ..
+    *title: string
+    *thumbnail: string
+    *content: string
+    *categoryId: List<number> <FK>
+    *userId: number <FK>
+    *createdAt: Date
+    *updatedAt: Date
+}
+
+entity Comment #b3cde0 {
+    *id: number
+    ..
+    *content: string
+    *postId: number <FK>
+    *userId: number <FK>
+    +response: number <FK>
+    *createdAt: Date
+    *updatedAt: Date
+}
+
+entity Category #b3cde0 {
+    *id: number
+    ..
+    *name: string
+    +desc: string
+    *createdAt: Date
+    *updatedAt: Date
+}
+
+entity Challenge #b3cde0 {
+    *id: number
+    ..
+    *title: string
+    *startDate: Date
+    *endDate: Date
+    *userId: number <FK>
+    *createdAt: Date
+    *updatedAt: Date
+}
+
+Post o-[bold,#MediumBlue]-> User
+Post o-[bold,#MediumBlue]-> Category
+Comment o-[bold,#MediumBlue]-> User
+Comment o-[bold,#MediumBlue]-> Post
+Comment <-[bold,#YellowGreen]-o Comment
+Challenge o-[bold,#MediumBlue]-> User
+
+@enduml
